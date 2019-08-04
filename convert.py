@@ -25,7 +25,7 @@ def mix(src, white):
 	return tuple(ret)
 
 
-def reserve_rgb(dst, white):
+def reverse_rgb(dst, white):
 	#      dst = up * alpha + dw * (1 - alpha)
 	# => alpha = (dst - dw) / (up - dw)
 	ret = [0, 0, 0]
@@ -45,7 +45,7 @@ def reverse(img, white):
 	for x in range(width):
 		for y in range(height):
 			nxy = (x, ih - height + y)
-			result = reserve_rgb(pixels[nxy], white[x, y])
+			result = reverse_rgb(pixels[nxy], white[x, y])
 			pixels[nxy] = result
 
 	return img
