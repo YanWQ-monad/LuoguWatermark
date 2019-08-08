@@ -7,7 +7,7 @@
 
 图片经过处理后（得到掩码图），再上传到洛谷图床，可以在一定程度上减弱水印（对于某些图片还可以抵消，见下文）。
 
-这里有几个例子：
+这里有几个例子（基于洛谷 3.0）：
 
 ![Example 1](https://raw.githubusercontent.com/YanWQ-monad/static/master/LuoguWatermark/1.png)
 
@@ -17,6 +17,8 @@
 
 ## 使用
 
+**[在线体验](https://lg-watermark.monadx.com)**
+
 ### 依赖
 
 首先确保你已安装了 Python，再安装依赖：
@@ -25,7 +27,7 @@
 pip install Pillow
 ```
 
-然后请 clone 本项目（其实只需要 `convert.py` 和 `base.png`）或下载[压缩包](https://github.com/YanWQ-monad/LuoguWatermark/archive/master.zip)。
+然后请 clone 本项目（其实只需要 `convert.py` 和 `base_black.png`, `base_white.png`）或下载[压缩包](https://github.com/YanWQ-monad/LuoguWatermark/archive/master.zip)。
 
 ```
 git clone https://github.com/YanWQ-monad/LuoguWatermark.git
@@ -47,18 +49,20 @@ python convert.py [origin] [target]
 
 **洛谷水印减弱工具会减弱水印，但并不保证能完全消除水印。**
 
-经过研究发现，RGB 在一定的范围内可以抵消水印：
-
-- R: \[0, 142\]
-- G: \[44, 187\]
-- B: \[112, 254\]
-
-即如下图所示：
-
-<details>
-  <summary>点击查看</summary>
-  <img src="https://raw.githubusercontent.com/YanWQ-monad/static/master/LuoguWatermark/3.png" alt="Condition" />
-</details>
+> **这一段的数据由于洛谷更新已经失效**，~~仅供观光~~
+> 
+> 经过研究发现，RGB 在一定的范围内可以抵消水印：
+>
+> - R: \[0, 142\]
+> - G: \[44, 187\]
+> - B: \[112, 254\]
+>
+> 即如下图所示：
+>
+> <details>
+>   <summary>点击查看</summary>
+>   <img src="https://raw.githubusercontent.com/YanWQ-monad/static/master/LuoguWatermark/3.png" alt="Condition" />
+> </details>
 
 在其它情况下，此工具可以尽可能地减弱水印。
 
@@ -67,6 +71,8 @@ python convert.py [origin] [target]
 该期望相似度可以用于判断去水印的效果（越小越好）。
 
 上面例子的期望相似度：
+
+> 注：这是洛谷 3.0 的数据
 
 - 例 1：0.022121
 - 例 2：8.905619
@@ -78,7 +84,3 @@ python convert.py [origin] [target]
 | < 0.5 | 肉眼难以分辨 |
 | 0.5 ~ 10 | 依稀可见 |
 | > 10 | 应该只能变淡 |
-
-## 已知问题
-
-上传后，在水印文字的周围会有一些残留掩码点（表现为偏黄色噪点），但并不影响总体效果。
